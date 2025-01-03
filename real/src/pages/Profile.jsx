@@ -1,11 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import {getDownloadURL,getStorage,ref,uploadBytesResumable,} from "firebase/storage";
 import { app } from "../firebase";
 import {
   updateUserStart,
@@ -133,8 +128,7 @@ const Profile = () => {
         setShowListingsError(true);
         return;
       }
-
-       setUserListings(data);
+      setUserListings(data);
     } catch (error) {
       setShowListingsError(true);
     }
@@ -264,7 +258,7 @@ const Profile = () => {
                 />
               </Link>
               <Link
-                className="text-slate-700 font-semibold  hover:underline truncate flex-1"
+                className="text-slate-700 font-semibold hover:underline truncate flex-1"
                 to={`/listing/${listing._id}`}
               >
                 <p>{listing.name}</p>

@@ -33,10 +33,7 @@ export default function Header() {
             <span className="text-state-700">Estate</span>
           </h1>
         </Link>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-slate-100 p-3 rounded-lg flex items-center"
-        >
+        <form onSubmit={handleSubmit} className="bg-slate-100 p-3 rounded-lg flex items-center">
           <input
             text="text"
             placeholder="Search..."

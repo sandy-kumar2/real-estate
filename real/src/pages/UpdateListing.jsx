@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import {getDownloadURL,getStorage,ref,uploadBytesResumable} from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -44,7 +39,6 @@ export default function CreateListing() {
       }
       setFormData(data);
     };
-
     fetchListing();
   }, []);
 
@@ -57,6 +51,7 @@ export default function CreateListing() {
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
       }
+
       Promise.all(promises)
         .then((urls) => {
           setFormData({
@@ -85,9 +80,7 @@ export default function CreateListing() {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         },
         (error) => {
           reject(error);
@@ -132,10 +125,7 @@ export default function CreateListing() {
       e.target.type === "text" ||
       e.target.type === "textarea"
     ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.value,
-      });
+      setFormData({...formData, [e.target.id]: e.target.value});
     }
   };
 
@@ -158,17 +148,21 @@ export default function CreateListing() {
           userRef: currentUser._id,
         }),
       });
+
       const data = await res.json();
       setLoading(false);
+
       if (data.success === false) {
         setError(data.message);
       }
+
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
     }
   };
+
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
@@ -354,10 +348,7 @@ export default function CreateListing() {
           </p>
           {formData.imageUrls.length > 0 &&
             formData.imageUrls.map((url, index) => (
-              <div
-                key={url}
-                className="flex justify-between p-3 border items-center"
-              >
+              <div key={url} className="flex justify-between p-3 border items-center">
                 <img
                   src={url}
                   alt="listing image"

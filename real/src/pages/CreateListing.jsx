@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import {getDownloadURL,getStorage,ref,uploadBytesResumable,} from "firebase/storage";
 import { app } from "../firebase";
-import { async } from '@firebase/util';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -131,8 +125,10 @@ const CreateListing = () => {
       {
         return setError('Discount price must be lower than regular price');
       }
+
       setLoading(true);
       setError(false);
+
       const res = await fetch(`/api/listing/create/${currentUser._id}`, {
         method: "POST",
         headers: {
@@ -145,10 +141,12 @@ const CreateListing = () => {
       });
       const data = await res.json();
       setLoading(false);
+
       if(data.success === false)
       {
         setError(data.message);
       }
+      
       navigate(`/listing/${data._id}`);
     }catch(error){
       setError(error.message);
